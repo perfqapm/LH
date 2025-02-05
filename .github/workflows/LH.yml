@@ -2,7 +2,6 @@ name: LH
 
 env:
   REQUEST_TIMEOUT: 30000
-  ITERATION_COUNT: 3
 
 on:
   # schedule:
@@ -13,32 +12,6 @@ on:
   #       - main
 
   workflow_dispatch:
-    inputs:
-      collectionURL:
-        description: 'Collection URL or Json file. [E.g ReqRes.postman_collection.json]'
-        required: true
-        default: '$COLLECTION_URL_OR_JSON'
-      iteratorCnt:
-        description: 'Iteration count'
-        required: true
-        default: $ITERATION_COUNT
-      environmentJson:
-        description: 'Environment JSON file( *optional ). [E.g workspace.postman_globals.json]'
-        required: true
-        default: $ENVIRONMENT_JSON
-      iRequestTimeout:
-        description: 'Request wait timeout'
-        required: true
-        default: $REQUEST_TIMEOUT
-      emailIds:
-        description: 'Notification email ids. Comma(,) separated, no spaces. [E.g "ram@xzy.in,sam@xyz.in"]'
-        required: true
-        default: $EMIAL_IDS
-      iterationData:
-        description: 'External User input file'
-        required: true
-        default: $ITERATION_DATA
-
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -54,7 +27,7 @@ jobs:
 
       - name: Run JS with args
         run: |
-          mkdir -p newman
+          mkdir -p reports
           node lighthouse.mjs
           ls
           ifconfig -a
@@ -64,4 +37,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: lighthouse-report
-          path: newman/lighthouse-report.html
+          path: reports/lighthouse-report.html
