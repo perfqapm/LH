@@ -18,7 +18,7 @@ async function generateLighthouseReport(url) {
   const runnerResult = await lighthouse(url, options);
 
   const reportHtml = runnerResult.report;
-  fs.writeFileSync('lighthouse-report.html', reportHtml);
+  fs.writeFileSync('newman/lighthouse-report.html', reportHtml);
 
   console.log('Lighthouse Performance Score:', runnerResult.lhr.categories.performance.score * 100);
 
