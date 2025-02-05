@@ -59,3 +59,9 @@ jobs:
           ls
           ifconfig -a
           wget -qO- ifconfig.me
+
+      - name: Upload Lighthouse Report as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-report
+          path: newman/lighthouse-report.html
