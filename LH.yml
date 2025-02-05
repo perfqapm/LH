@@ -1,0 +1,69 @@
+name: LH
+
+env:
+  COLLECTION_URL_OR_JSON: 
+  REQUEST_TIMEOUT: 30000
+  EMIAL_IDS: 
+  ITERATION_COUNT: 3
+  ENVIRONMENT_JSON: ''
+  ITERATION_DATA: ''
+
+on:
+  # schedule:
+  # - cron: '30 4 * * 1-5'
+
+  #   push:
+  #     branches:
+  #       - main
+
+  workflow_dispatch:
+    inputs:
+      collectionURL:
+        description: 'Collection URL or Json file. [E.g ReqRes.postman_collection.json]'
+        required: true
+        default: '$COLLECTION_URL_OR_JSON'
+      iteratorCnt:
+        description: 'Iteration count'
+        required: true
+        default: $ITERATION_COUNT
+      environmentJson:
+        description: 'Environment JSON file( *optional ). [E.g workspace.postman_globals.json]'
+        required: true
+        default: $ENVIRONMENT_JSON
+      iRequestTimeout:
+        description: 'Request wait timeout'
+        required: true
+        default: $REQUEST_TIMEOUT
+      emailIds:
+        description: 'Notification email ids. Comma(,) separated, no spaces. [E.g "ram@xzy.in,sam@xyz.in"]'
+        required: true
+        default: $EMIAL_IDS
+      iterationData:
+        description: 'External User input file'
+        required: true
+        default: $ITERATION_DATA
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install packages
+        run: |
+          npm i lighthouse
+          npm i lighthouse chrome-launcher
+          npm i node-fetch
+
+      - name: Run JS with args
+        run: |
+          node lighthouse.mjs
+          ls
+          ifconfig -a
+          wget -qO- ifconfig.me
+
+      - uses: actions/upload-artifact@v3.1.2
+        with:
+          name: ARTIFACT
+          path: newman
