@@ -54,6 +54,7 @@ jobs:
 
       - name: Run JS with args
         run: |
+          mkdir -p newman
           node lighthouse.mjs
           ls
           ifconfig -a
