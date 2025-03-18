@@ -29,9 +29,6 @@ jobs:
         run: |
           mkdir -p reports
           node lighthouse.mjs
-          ls
-          ifconfig -a
-          wget -qO- ifconfig.me
 
       - name: Upload Lighthouse Report as Artifact
         uses: actions/upload-artifact@v4
