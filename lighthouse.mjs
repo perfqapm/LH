@@ -26,6 +26,10 @@ async function generateLighthouseReport(url) {
   console.log('Lighthouse best-practices Score:', runnerResult.lhr.categories['best-practices'].score * 100);
   
   console.log('Lighthouse First Contentful Paint:', runnerResult.lhr.audits['first-contentful-paint'].displayValue);
+  console.log('Lighthouse Largest Contentful Paint:', runnerResult.lhr.audits['largest-contentful-paint'].displayValue);
+  console.log('Lighthouse Total Blocking Time:', runnerResult.lhr.audits['total-blocking-time'].displayValue);
+  console.log('Lighthouse Cumulative Layout Shift:', runnerResult.lhr.audits['cumulative-layout-shift'].displayValue);
+  console.log('Lighthouse Speed Index:', runnerResult.lhr.audits['speed-index'].displayValue);
 
   await chrome.kill();
 }
