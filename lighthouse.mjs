@@ -25,7 +25,7 @@ async function generateLighthouseReport(url) {
   console.log('Lighthouse Seo Score:', runnerResult.lhr.categories.seo.score * 100);
   console.log('Lighthouse best-practices Score:', runnerResult.lhr.categories['best-practices'].score * 100);
 
-  console.log('Lighthouse first-contentful-paint Score:', runnerResult.lhr.categories['first-contentful-paint'].score * 100);
+  console.log('Lighthouse First Contentful Paint Score:', runnerResult.lhr.audits['first-contentful-paint'].score * 100);
 
   await chrome.kill();
 }
