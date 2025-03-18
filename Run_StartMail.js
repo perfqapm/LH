@@ -1,37 +1,40 @@
-    const nodemailer = require('nodemailer');
-    const fs = require('fs');
-    require('dotenv').config({ path: './.env' });
-    const performanceScore = process.env.performanceScore;
+const nodemailer = require('nodemailer');
+require('dotenv').config({ path: './.env' });
 
-    let emailAddress;
-    let gmailPassword;
-emailAddress = 'lokeshwar.reddy@robosoftin.com';
+const performanceScore = process.env.performanceScore;
+const emailAddress = 'lokeshwar.reddy@robosoftin.com';
+
 console.log('Email Ids: ' + emailAddress);
 
 async function mailFun(performanceScore) {
-  // Create a transporter using Gmail SMTP settings
-  const transporter = nodemailer.createTransport({
-    service: 'gmail',
-    auth: {
-      user: 'ramsnotification@gmail.com',
-      pass: 'uwyvhdauoxuabayb'
-    }
-  });
+  try {
+    // Create a transporter using Gmail SMTP settings
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: 'ramsnotification@gmail.com', // Set this in .env
+        pass: 'uwyvhdauoxuabayb' // Set this in .env
+      }
+    });
 
-  const html = `
-    <h1>Light House Report</h1>
-    <h2>No. of Request with failed respone status: ${performanceScore}.</h2>
+    const html = `
+      <h1>Light House Report</h1>
+      <h2>No. of Requests with Failed Response Status: ${performanceScore}.</h2>
     `;
 
-  const info = await transporter.sendMail({
-    from: 'Monitoring Service <ramsnotification@gmail.com>',
-    to: emailAddress,
-    subject: 'Light House Report Run',
-    //text: 'This is a test email sent from Node.js using Nodemailer',
-    html: '<html><body>',
-  })
+    const info = await transporter.sendMail({
+      from: `Monitoring Service <${process.env.EMAIL_USER}>`,
+      to: emailAddress,
+      subject: 'Lighthouse Report Run',
+      html: html
+    });
 
-  console.log('Email sent: ' + info.response);
-  console.log('Email accepted: ' + info.accepted);
+    console.log('Email sent: ' + info.response);
+    console.log('Email accepted: ', info.accepted);
+  } catch (error) {
+    console.error('Error sending email:', error);
+  }
+}
 
-} // mailFun
+// Call the function
+mailFun(performanceScore);
