@@ -5,7 +5,7 @@
 
     let emailAddress;
     let gmailPassword;
-emailAddress = 'lokeshwar.reddy@gmail.com';
+emailAddress = 'lokeshwar.reddy@robosoftin.com';
 console.log('Email Ids: ' + emailAddress);
 
 async function mailFun(performanceScore) {
