@@ -63,7 +63,7 @@ async function generateLighthouseReport(url) {
   await chrome.kill();
 }
 
-const urlToTest = 'https://example.com';
+const urlToTest = 'https://www.robosoftin.com/';
 generateLighthouseReport(urlToTest)
   .then(() => console.log('Lighthouse report generated successfully.'))
   .catch(err => console.error('Error generating Lighthouse report:', err));
