@@ -8,7 +8,7 @@ const emailAddress = 'lokeshwar.reddy@robosoftin.com';
 
 console.log('Email Ids: ' + emailAddress);
 
-async function mailFun(performanceScore,firstContentfulPaint,attachmentPaths) {
+async function sendEmail(performanceScore,firstContentfulPaint,attachmentPaths) {
   try {
     // Create a transporter using Gmail SMTP settings
     const transporter = nodemailer.createTransport({
@@ -40,5 +40,5 @@ async function mailFun(performanceScore,firstContentfulPaint,attachmentPaths) {
   }
 }
 
-// Call the function
-mailFun(performanceScore,firstContentfulPaint,attachmentPaths);
+
+module.exports = sendEmail;
