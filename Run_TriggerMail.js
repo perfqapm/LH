@@ -1,21 +1,16 @@
-const sendEmail = require('./Run_StartMail_HTML_CSV.js');
-require('dotenv').config({path: './1.env'}); 
-assertionErrorCount = process.env.assertionErrorCount;
-assertionOkCount = process.env.assertionOkCount;
-statusNotOkCount = process.env.statusNotOkCount;
-statusOkCount = process.env.statusOkCount;
-iterationCount = process.env.iterationCount;
-const totalAPIsCount = process.env.totalAPIsCount;
+const nodemailer = require('nodemailer');
+require('dotenv').config({ path: './.env' });
+
+const performanceScore = process.env.performanceScore;
+const firstContentfulPaint = process.env.firstContentfulPaint;
 
 // Gather the variable values
-const Failures = assertionErrorCount;
-const Failures1 = statusNotOkCount;
-const Failures2 = assertionOkCount;
-const Failures3 = statusOkCount;
+const Failures = performanceScore;
+const Failures1 = firstContentfulPaint;
 
 
-const attachmentPaths = ['newman/HTMLReport.html', 'newman/CSVReport.csv'];
+const attachmentPaths = ['reports/lighthouse-report.html'];
 
 
 // Call the sendEmail function with the variable values
-sendEmail(Failures, Failures1, Failures2, Failures3, attachmentPaths);
+sendEmail(Failures, Failures1, attachmentPaths);
