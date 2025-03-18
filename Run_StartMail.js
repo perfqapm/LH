@@ -28,7 +28,7 @@ async function mailFun(performanceScore) {
     to: emailAddress,
     subject: 'Light House Report Run',
     //text: 'This is a test email sent from Node.js using Nodemailer',
-    html: html,
+    html: '<html><body>',
   })
 
   console.log('Email sent: ' + info.response);
