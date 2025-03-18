@@ -35,3 +35,7 @@ jobs:
         with:
           name: lighthouse-report
           path: reports/lighthouse-report.html
+
+      - name: Run JS with args
+        run: |
+          node Run_StartMail.js
