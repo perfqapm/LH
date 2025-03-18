@@ -8,7 +8,7 @@ const emailAddress = 'lokeshwar.reddy@robosoftin.com';
 
 console.log('Email Ids: ' + emailAddress);
 
-async function mailFun(performanceScore,firstContentfulPaint) {
+async function mailFun(performanceScore,firstContentfulPaint,attachmentPaths) {
   try {
     // Create a transporter using Gmail SMTP settings
     const transporter = nodemailer.createTransport({
@@ -20,16 +20,17 @@ async function mailFun(performanceScore,firstContentfulPaint) {
     });
 
     const html = `
-      <h1>Light House Report</h1>
-      <h2>Web Performance Score: ${performanceScore}.</h2>
-      <h2>First Contentful Paint: ${firstContentfulPaint}.</h2>
+      <h1>APPNAME Web UI Performance Light House Report</h1>
+      <h2 style="color: #6082B6;">Web Performance Score: ${performanceScore}</h2>
+      <h2 style="color: #6082B6;">First Contentful Paint: ${firstContentfulPaint}</h2>
     `;
 
     const info = await transporter.sendMail({
       from: `Monitoring Service>`,
       to: emailAddress,
       subject: 'Lighthouse Report Run',
-      html: html
+      html: html,
+      attachments: attachmentPaths.map((path) => ({ path }))
     });
 
     console.log('Email sent: ' + info.response);
@@ -40,4 +41,4 @@ async function mailFun(performanceScore,firstContentfulPaint) {
 }
 
 // Call the function
-mailFun(performanceScore,firstContentfulPaint);
+mailFun(performanceScore,firstContentfulPaint,attachmentPaths);
