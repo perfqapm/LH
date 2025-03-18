@@ -4,9 +4,23 @@ require('dotenv').config({ path: './.env' });
 const performanceScore = process.env.performanceScore;
 const firstContentfulPaint = process.env.firstContentfulPaint;
 
-const emailAddress = 'lokeshwar.reddy@robosoftin.com';
+const emailAddress = 'lokeshwar.reddy@robosoftin.com,yashchith.devadiga@robosoftin.com';
 
-console.log('Email Ids: ' + emailAddress);
+try {
+    // Removing all spaces
+    let temp = emailAddress.replace(/\s/g, '');
+
+    // Splitting emails if multiple exist
+    if (temp.includes(',')) {
+        emailAddress = temp.split(',');
+    } else {
+        emailAddress = [temp]; // Ensure it's always an array
+    }
+
+    console.log(emailAddress);
+} catch (error) {
+    console.error("Error processing emails:", error.message);
+}
 
 async function sendEmail(performanceScore,firstContentfulPaint,attachmentPaths) {
   try {
@@ -26,9 +40,9 @@ async function sendEmail(performanceScore,firstContentfulPaint,attachmentPaths) 
     `;
 
     const info = await transporter.sendMail({
-      from: `Monitoring Service>`,
+      from: `Performance Monitoring>`,
       to: emailAddress,
-      subject: 'Lighthouse Report Run',
+      subject: 'APPNAME Lighthouse Report',
       html: html,
       attachments: attachmentPaths.map((path) => ({ path }))
     });
