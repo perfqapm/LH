@@ -4,7 +4,7 @@ require('dotenv').config({ path: './.env' });
 const performanceScore = process.env.performanceScore;
 const firstContentfulPaint = process.env.firstContentfulPaint;
 
-const emailAddress = 'lokeshwar.reddy@robosoftin.com,yashchith.devadiga@robosoftin.com';
+const emailAddress = 'lokeshwar.reddy@robosoftin.com';
 
 try {
     // Removing all spaces
