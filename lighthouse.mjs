@@ -21,6 +21,9 @@ async function generateLighthouseReport(url) {
   fs.writeFileSync('reports/lighthouse-report.html', reportHtml);
 
   console.log('Lighthouse Performance Score:', runnerResult.lhr.categories.performance.score * 100);
+  console.log('Lighthouse Accessibility Score:', runnerResult.lhr.categories.accessibility.score * 100);
+  console.log('Lighthouse Seo Score:', runnerResult.lhr.categories.seo.score * 100);
+  // console.log('Lighthouse best-practices Score:', runnerResult.lhr.categories.best-practices.score * 100);
 
   await chrome.kill();
 }
