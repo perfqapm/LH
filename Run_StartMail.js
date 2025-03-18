@@ -2,11 +2,13 @@ const nodemailer = require('nodemailer');
 require('dotenv').config({ path: './.env' });
 
 const performanceScore = process.env.performanceScore;
+const firstContentfulPaint = process.env.firstContentfulPaint;
+
 const emailAddress = 'lokeshwar.reddy@robosoftin.com';
 
 console.log('Email Ids: ' + emailAddress);
 
-async function mailFun(performanceScore) {
+async function mailFun(performanceScore,firstContentfulPaint) {
   try {
     // Create a transporter using Gmail SMTP settings
     const transporter = nodemailer.createTransport({
@@ -19,11 +21,12 @@ async function mailFun(performanceScore) {
 
     const html = `
       <h1>Light House Report</h1>
-      <h2>No. of Requests with Failed Response Status: ${performanceScore}.</h2>
+      <h2>Web Performance Score: ${performanceScore}.</h2>
+      <h2>First Contentful Paint: ${firstContentfulPaint}.</h2>
     `;
 
     const info = await transporter.sendMail({
-      from: `Monitoring Service <${process.env.EMAIL_USER}>`,
+      from: `Monitoring Service>`,
       to: emailAddress,
       subject: 'Lighthouse Report Run',
       html: html
@@ -37,4 +40,4 @@ async function mailFun(performanceScore) {
 }
 
 // Call the function
-mailFun(performanceScore);
+mailFun(performanceScore,firstContentfulPaint);
