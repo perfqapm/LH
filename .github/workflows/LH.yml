@@ -24,6 +24,8 @@ jobs:
           npm i lighthouse
           npm i lighthouse chrome-launcher
           npm i node-fetch
+          npm install --save dotenv
+          npm i nodemailer
 
       - name: Run JS with args
         run: |
