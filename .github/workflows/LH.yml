@@ -41,3 +41,7 @@ jobs:
       - name: Run JS with args
         run: |
           node Run_StartMail.js
+
+      - name: Run JS with args
+        run: |
+          node Run_TriggerMail.js
