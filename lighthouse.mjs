@@ -28,6 +28,7 @@ async function generateLighthouseReport(url) {
   const envFileContent = fs.readFileSync(envFilePath, 'utf8');
   // Define the dynamic variable and its value
   const dynamicVariableName = 'performanceScore';
+  const dynamicVariableValue = performanceScore;
   // Create or update the dynamic variable in the .env file content
   let updatedEnvFileContent = '';
   if (envFileContent.includes(dynamicVariableName)) {
